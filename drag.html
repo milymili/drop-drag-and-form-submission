@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <style>
+        /* Style for the draggable box */
+        #draggableBox {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            cursor: grab;
+            border-radius: 10px;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            color: brown;
+            font-family: Arial, sans-serif;
+            padding: 30px 50px;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+body {
+  background-color: rgb(187, 93, 167);
+}
+h2 {
+            text-align: center;
+            position: top;
+            width: 100%;
+            top: 20px;
+	    color: white;
+}
+div {
+  display: block;
+}
+    </style>
+
+<style>
+    ul{
+        /* list-style-type: ; */
+        display: flex;
+        flex-direction: row;
+        background-color: #000;
+    }
+    li{
+        list-style: none;
+        flex: 1;
+    }
+    li a{
+        text-decoration: none;
+        font-size: 30px;
+        color: #fff;
+    }
+
+    li a:hover{
+        color: #000;
+        background-color: #fff;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="drag.html">Drag and Drop</a></li>
+            <li><a href="mouse.html">Move Mouse</a></li>
+            <li><a href="form.html">Submit Form</a></li>
+        </ul>
+    </header>
+<h2>Dragging & Dropping the Box</h2>
+    <!-- Draggable Box -->
+    <div id="draggableBox">Drag<br>This<br>Form</div>
+
+    <script>
+       
+        const draggableBox = document.getElementById('draggableBox');
+
+     
+        let offsetX = 0, offsetY = 0, isDragging = false;
+
+        
+        draggableBox.addEventListener('mousedown', (e) => {
+            // Mark the element as being dragged
+            isDragging = true;
+            draggableBox.style.cursor = 'grabbing';
+
+            <!-- Calculate the offset between the mouse and the top-left corner of the box -->
+            offsetX = e.clientX - draggableBox.getBoundingClientRect().left;
+            offsetY = e.clientY - draggableBox.getBoundingClientRect().top;
+        });
+
+       
+        document.addEventListener('mousemove', (e) => {
+            
+            if (isDragging) {
+                
+                const newX = e.clientX - offsetX;
+                const newY = e.clientY - offsetY;
+
+              
+                draggableBox.style.left = `${newX}px`;
+                draggableBox.style.top = `${newY}px`;
+            }
+        });
+
+       
+        document.addEventListener('mouseup', () => {
+      
+            isDragging = false;
+            draggableBox.style.cursor = 'grab';
+        });
+    </script>
+
+</body>
+</html>
